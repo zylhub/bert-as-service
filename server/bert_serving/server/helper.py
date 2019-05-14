@@ -103,6 +103,9 @@ def get_args_parser():
     group2.add_argument('-pooling_strategy', type=PoolingStrategy.from_string,
                         default=PoolingStrategy.REDUCE_MEAN, choices=list(PoolingStrategy),
                         help='the pooling strategy for generating encoding vectors')
+    # add for classification
+    group2.add_argument('-num_labels', type=int, default=10,
+                        help="Number of labels")
     group2.add_argument('-mask_cls_sep', action='store_true', default=False,
                         help='masking the embedding on [CLS] and [SEP] with zero. \
                         When pooling_strategy is in {CLS_TOKEN, FIRST_TOKEN, SEP_TOKEN, LAST_TOKEN} \
