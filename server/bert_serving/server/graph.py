@@ -125,7 +125,8 @@ def optimize_graph(args, logger=None):
                 elif args.pooling_strategy == PoolingStrategy.NONE:
                     pooled = mul_mask(encoder_layer, input_mask)
                 elif args.pooling_strategy == PoolingStrategy.CLASSIFICATION:
-                    pooled = tf.squeeze(encoder_layer[:, 0:1, :], axis=1)
+                    # pooled = tf.squeeze(encoder_layer[:, 0:1, :], axis=1)
+                    pooled = model.get_pooled_output()
                     logits = tf.matmul(pooled, output_weights, transpose_b=True)
                     logits = tf.nn.bias_add(logits, output_bias)
                     pooled = tf.nn.softmax(logits, axis=-1)
